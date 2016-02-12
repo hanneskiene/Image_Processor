@@ -15,6 +15,13 @@ public:
 
 	void set_size(int, int);
 
+	//Could change to return unique_ptr
+	Pixel* get_pixel(int);
+
+	Pixel* get_pixel(int, int);
+
+	//Console Output Funktion
+	void console_print();
 
 	~Image();
 private:

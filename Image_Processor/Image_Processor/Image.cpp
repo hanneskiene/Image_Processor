@@ -31,6 +31,29 @@ void Image::set_size(int a_x, int a_y)
 	std::cout << "ERROR: Image size changing not implemented yet" << std::endl;
 }
 
+Pixel * Image::get_pixel(int arg)
+{
+	return pixels.at(arg).get();
+}
+
+Pixel * Image::get_pixel(int a_x, int a_y)
+{
+	return pixels.at(a_y * size_x + a_x).get();
+}
+
+void Image::console_print()
+{
+	for (int i = 0; i < size_x; i++) {
+		for (int z = 0; z < size_y; z++) {
+			if (pixels.at(i*size_x + z)->get_color().get_b() > 150)
+				std::cout << "0";
+			else
+				std::cout << " ";
+		}
+		std::cout << std::endl;
+	}
+}
+
 Image::~Image()
 {
 	std::cout << "Image destroyed" << std::endl;

@@ -146,12 +146,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Bitmap_Handler.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="Image_Processor.h" />
     <ClInclude Include="Pixel.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Bitmap_Handler.cpp" />
     <ClCompile Include="Color.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="Image_Processor.cpp" />

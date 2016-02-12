@@ -27,6 +27,9 @@
     <ClInclude Include="Color.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="Bitmap_Handler.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Image_Processor.cpp">
@@ -42,6 +45,9 @@
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="Color.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Bitmap_Handler.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>

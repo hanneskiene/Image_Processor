@@ -37,11 +37,11 @@ void Color::set_color(int a_r, int a_g, int a_b)
 	b = a_b;
 }
 
-signed char Color::get_r() { return r; }
+unsigned char Color::get_r() { return r; }
 
-signed char Color::get_g() { return g; }
+unsigned char Color::get_g() { return g; }
 
-signed char Color::get_b() { return b; }
+unsigned char Color::get_b() { return b; }
 
 
 Color::~Color()

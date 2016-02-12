@@ -16,13 +16,13 @@ public:
 
 	void set_color(int, int, int);
 
-	signed char get_r();
-	signed char get_g();
-	signed char get_b();
+	unsigned char get_r();
+	unsigned char get_g();
+	unsigned char get_b();
 
 	~Color();
 
-	signed char r, g, b;
+	unsigned char r, g, b;
 
 };
 
