@@ -14,7 +14,7 @@ int Image_Processor::run()
 	auto my_image = std::make_unique<Image>(10, 10);
 
 	Bitmap_Handler my_bitmap_handler;
-	auto bmp_image = my_bitmap_handler.get_Image("test.bmp");
+	auto bmp_image = my_bitmap_handler.get_Image("test1.bmp");
 
 	bmp_image->console_print();
 
@@ -24,5 +24,5 @@ int Image_Processor::run()
 
 Image_Processor::~Image_Processor()
 {
-	std::cout << "Image Processor destroyed" << std::endl;
+	//std::cout << "Image Processor destroyed" << std::endl;
 }

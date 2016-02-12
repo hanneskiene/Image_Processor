@@ -56,5 +56,5 @@ void Image::console_print()
 
 Image::~Image()
 {
-	std::cout << "Image destroyed" << std::endl;
+	//std::cout << "Image destroyed" << std::endl;
 }
