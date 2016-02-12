@@ -9,6 +9,7 @@ public:
 	int run();
 
 	~Image_Processor();
+
 };
 
 
