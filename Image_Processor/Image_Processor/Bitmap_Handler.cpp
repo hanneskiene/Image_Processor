@@ -9,14 +9,15 @@ Bitmap_Handler::Bitmap_Handler()
 std::shared_ptr<Image> Bitmap_Handler::get_Image(const char * file_name)
 {
 
-	std::ifstream input(file_name, std::ios::binary);
+	auto input = std::ifstream{ file_name, std::ios::binary };
 	if (input.is_open()) {
 
 		// get length of file:
 		input.seekg(0, input.end);
-		int length = input.tellg();
+		auto length = input.tellg();
 		input.seekg(0, input.beg);
 
+		//Should be replaced by an import into a vector
 		char *buffer = new char[length];
 		input.read(buffer, length);
 
@@ -43,13 +44,20 @@ std::shared_ptr<Image> Bitmap_Handler::get_Image(const char * file_name)
 
 		int index = data_offset;
 
-		for (int i = 0; i < size_x; i++) {
-			for (int z = 0; z < size_y; z++) {
+		for (int i = 0; i < size_y; i++) {
+			//Row index must be %4
+			int row_ind = 0;
+			for (int z = 0; z < size_x; z++) {
 				Color temp_color((unsigned char)(buffer[index]), (unsigned char)(buffer[index + 1]), (unsigned char)(buffer[index + 2]));
-				output->get_pixel(size_x - 1 - i, z)->set_color(temp_color);
+				output->get_pixel( z, i)->set_color(temp_color);
 				index += 3;
+				row_ind += 3;
+				//Catch last Bytes in Row
+				if(z == (size_x - 1)) {
+					while (row_ind % 4 != 0) { index++; row_ind++; }
+				}
+
 			}
-			index += 2;
 		}
 
 		input.close();
@@ -64,6 +72,11 @@ std::shared_ptr<Image> Bitmap_Handler::get_Image(const char * file_name)
 	}
 }
 
+bool Bitmap_Handler::export_image(Image * image, const char * file_name) 
+{
+	std::cout << "WARNING: BMP Output not implemented yet" << std::endl;
+	return false;
+}
 
 Bitmap_Handler::~Bitmap_Handler()
 {

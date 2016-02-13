@@ -43,12 +43,12 @@ Pixel * Image::get_pixel(int a_x, int a_y)
 
 void Image::console_print()
 {
-	for (int i = 0; i < size_x; i++) {
-		for (int z = 0; z < size_y; z++) {
-			if (pixels.at(i*size_x + z)->get_color().get_b() > 150)
-				std::cout << "0";
-			else
-				std::cout << " ";
+	for (int i = 0; i < size_y; i++) {
+			for (int z = 0; z < size_x; z++) {
+				if (pixels.at(i*size_x + z)->get_color().get_b() > 150)
+					std::cout << "0";
+				else
+					std::cout << " ";
 		}
 		std::cout << std::endl;
 	}
