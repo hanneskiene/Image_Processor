@@ -11,7 +11,7 @@ Image_Processor::Image_Processor()
 
 int Image_Processor::run()
 {
-	auto my_image = std::make_unique<Image<unsigned char>>(10, 10);
+	auto my_image = std::make_unique<Image>(10, 10);
 
 	Bitmap_Handler my_bitmap_handler;
 	auto bmp_image = my_bitmap_handler.get_Image("test2.bmp");

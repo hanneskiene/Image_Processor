@@ -1,14 +1,13 @@
 #include "Image.h"
 
 
-template<class T>
+
 Image::Image()
 {
 	size_x = 0;
 	size_y = 0;
 }
 
-template<class T>
 Image::Image(int a_x, int a_y)
 {
 	size_x = a_x;
@@ -17,13 +16,13 @@ Image::Image(int a_x, int a_y)
 	//Add Pixels to Image
 	for (int i = 0; i < size_x; i++) {
 		for (int z = 0; z < size_y; z++) {
-			pixels.push_back(std::make_unique<Pixel<T>>());
+			pixels.push_back(std::make_unique<Pixel>());
 		}
 	}
 
 }
 
-template<class T>
+
 void Image::set_size(int a_x, int a_y)
 {
 	//Implement size changing here, needs to remove the right pixels out of the pixel array
@@ -32,19 +31,16 @@ void Image::set_size(int a_x, int a_y)
 	std::cout << "ERROR: Image size changing not implemented yet" << std::endl;
 }
 
-template<class T>
-Pixel<T> * Image::get_pixel(int arg)
+Pixel * Image::get_pixel(int arg)
 {
 	return pixels.at(arg).get();
 }
 
-template<class T>
-Pixel<T> * Image::get_pixel(int a_x, int a_y)
+Pixel * Image::get_pixel(int a_x, int a_y)
 {
 	return pixels.at(a_y * size_x + a_x).get();
 }
 
-template<class T>
 void Image::console_print()
 {
 	for (int i = 0; i < size_y; i++) {
@@ -58,7 +54,6 @@ void Image::console_print()
 	}
 }
 
-template<class T>
 Image::~Image()
 {
 	//std::cout << "Image destroyed" << std::endl;

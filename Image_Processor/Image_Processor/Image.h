@@ -5,7 +5,6 @@
 #include <vector>
 #include <iostream>
 
-template<class T>
 class Image
 {
 public:
@@ -17,9 +16,9 @@ public:
 	void set_size(int, int);
 
 	//Could change to return unique_ptr
-	Pixel<T>* get_pixel(int);
+	Pixel* get_pixel(int);
 
-	Pixel<T>* get_pixel(int, int);
+	Pixel* get_pixel(int, int);
 
 	//Console Output Funktion
 	void console_print();
@@ -29,6 +28,6 @@ private:
 	int size_x;
 	int size_y;
 
-	std::vector<std::unique_ptr<Pixel<T>>> pixels;
+	std::vector<std::unique_ptr<Pixel>> pixels;
 };
 
