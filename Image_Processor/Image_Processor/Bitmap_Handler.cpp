@@ -1,12 +1,13 @@
 #include "Bitmap_Handler.h"
 
 #include <fstream>
+#include <iostream>
 
 Bitmap_Handler::Bitmap_Handler()
 {
 }
 
-std::shared_ptr<Image> Bitmap_Handler::get_Image(const char * file_name)
+std::shared_ptr<Image_8> Bitmap_Handler::get_Image(const char * file_name)
 {
 
 	auto input = std::ifstream{ file_name, std::ios::binary };
@@ -49,7 +50,7 @@ std::shared_ptr<Image> Bitmap_Handler::get_Image(const char * file_name)
 		bCompression |= (unsigned char)buffer[32] << 16;
 		bCompression |= (unsigned char)buffer[33] << 24;
 
-		auto output = std::make_shared<Image>(size_x, size_y);
+		auto output = std::make_shared<Image_8>(size_x, size_y);
 
 		unsigned long index = data_offset;
 
@@ -57,8 +58,7 @@ std::shared_ptr<Image> Bitmap_Handler::get_Image(const char * file_name)
 			//Row index must be %4
 			unsigned int row_ind = 0;
 			for (unsigned int z = 0; z < size_x; z++) {
-				Color temp_color((unsigned char)(buffer[index]), (unsigned char)(buffer[index + 1]), (unsigned char)(buffer[index + 2]));
-				output->get_pixel( z, i)->set_color(temp_color);
+				output->get_pixel( z, i)->set_RGB((unsigned char)(buffer[index]), (unsigned char)(buffer[index + 1]), (unsigned char)(buffer[index + 2]));
 				index += 3;
 				row_ind += 3;
 				//Catch last Bytes in Row
@@ -76,12 +76,12 @@ std::shared_ptr<Image> Bitmap_Handler::get_Image(const char * file_name)
 		return output;
 	}
 	else {
-		return std::make_shared<Image>(0, 0);
+		return std::make_shared<Image_8>(0, 0);
 		std::cout << "Image not found" << std::endl;
 	}
 }
 
-bool Bitmap_Handler::export_image(Image * image, const char * file_name) 
+bool Bitmap_Handler::export_image(Image_8 * image, const char * file_name) 
 {
 	std::cout << "WARNING: BMP Output not implemented yet" << std::endl;
 	return false;
