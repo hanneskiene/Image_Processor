@@ -17,7 +17,7 @@ void Image_Modifier::greyValue(Image_8 * image)
 {
 	auto pixels = image->get_pixels();
 	for (int i = 0; i < pixels->size(); i++) {
-		unsigned char grauwert = (unsigned char)((pixels->at(i)->get_r()*0,299)+ (pixels->at(i)->get_g() * 0,587)+ (pixels->at(i)->get_b() * 0,114));
+		unsigned char grauwert = (unsigned char)(((pixels->at(i)->get_r())+ (pixels->at(i)->get_g())+ (pixels->at(i)->get_b()))/3);
 		pixels->at(i)->set_RGB(grauwert, grauwert, grauwert);
 	}
 }

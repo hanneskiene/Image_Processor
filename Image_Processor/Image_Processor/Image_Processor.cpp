@@ -19,7 +19,7 @@ int Image_Processor::run()
 
 	bmp_image_2->console_print();
 
-	Image_Modifier::invert(bmp_image_2.get());
+	Image_Modifier::greyValue(bmp_image_2.get());
 
 	bmp_image_2->console_print();
 
