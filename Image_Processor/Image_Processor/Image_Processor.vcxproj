@@ -147,18 +147,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Bitmap_Handler.h" />
-    <ClInclude Include="Color.h" />
-    <ClInclude Include="Image.h" />
     <ClInclude Include="Image_Processor.h" />
-    <ClInclude Include="Pixel.h" />
+    <ClInclude Include="Pixel_t.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Bitmap_Handler.cpp" />
-    <ClCompile Include="Color.cpp" />
-    <ClCompile Include="Image.cpp" />
     <ClCompile Include="Image_Processor.cpp" />
+    <ClCompile Include="Image_t.h" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Pixel.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
