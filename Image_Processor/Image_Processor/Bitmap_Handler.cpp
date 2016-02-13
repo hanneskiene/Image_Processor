@@ -14,7 +14,7 @@ std::shared_ptr<Image> Bitmap_Handler::get_Image(const char * file_name)
 
 		// get length of file:
 		input.seekg(0, input.end);
-		auto length = input.tellg();
+		unsigned long length = input.tellg();
 		input.seekg(0, input.beg);
 
 		//Should be replaced by an import into a vector
@@ -42,12 +42,12 @@ std::shared_ptr<Image> Bitmap_Handler::get_Image(const char * file_name)
 
 		auto output = std::make_shared<Image>(size_x, size_y);
 
-		int index = data_offset;
+		unsigned long index = data_offset;
 
-		for (int i = 0; i < size_y; i++) {
+		for (unsigned int i = 0; i < size_y; i++) {
 			//Row index must be %4
-			int row_ind = 0;
-			for (int z = 0; z < size_x; z++) {
+			unsigned int row_ind = 0;
+			for (unsigned int z = 0; z < size_x; z++) {
 				Color temp_color((unsigned char)(buffer[index]), (unsigned char)(buffer[index + 1]), (unsigned char)(buffer[index + 2]));
 				output->get_pixel( z, i)->set_color(temp_color);
 				index += 3;
