@@ -68,8 +68,77 @@ std::shared_ptr<Image_8> Bitmap_Handler::get_Image(const char * file_name)
 
 bool Bitmap_Handler::export_image(Image_8 * image, const char * file_name) 
 {
-	std::cout << "WARNING: BMP Output not implemented yet" << std::endl;
-	return false;
+	auto output = std::ofstream{ file_name, std::ios::binary };
+
+	output << "BM";
+	//File Size Parameter
+	uint32_t var_32_u = 54 + 3 * image->get_pixels()->size(); 
+	for (int i = 0; i < ((image->size_x * 3) % 4); i++) {
+		var_32_u += image->size_y;
+	}
+	output.write( (char*) &var_32_u, sizeof(var_32_u));
+	//Reserved
+	var_32_u = 0;
+	output.write((char*)&var_32_u, sizeof(var_32_u));
+	//Image offset
+	var_32_u = 54;
+	output.write((char*)&var_32_u, sizeof(var_32_u));
+	//Infoheader Size
+	var_32_u = 40;
+	output.write((char*)&var_32_u, sizeof(var_32_u));
+	//Width
+	int32_t var_32_s = image->size_x;
+	output.write((char*)&var_32_s, sizeof(var_32_s));
+	//Height
+	var_32_s = image->size_y;
+	output.write((char*)&var_32_s, sizeof(var_32_s));
+	//Unused
+	uint16_t var_16_u = 1;
+	output.write((char*)&var_16_u, sizeof(var_16_u));
+	//biBitCount
+	var_16_u = 24;
+	output.write((char*)&var_16_u, sizeof(var_16_u));
+	//Compression
+	var_32_u = 0;
+	output.write((char*)&var_32_u, sizeof(var_32_u));
+	//SizeImage
+	var_32_u = 0;
+	output.write((char*)&var_32_u, sizeof(var_32_u));
+	//Pixels per Meter
+	var_32_u = 0;
+	output.write((char*)&var_32_u, sizeof(var_32_u));
+	output.write((char*)&var_32_u, sizeof(var_32_u));
+	//Color Table
+	var_32_u = 0;
+	output.write((char*)&var_32_u, sizeof(var_32_u));
+	//Colors used
+	var_32_u = 0;
+	output.write((char*)&var_32_u, sizeof(var_32_u));
+
+	auto pixels = image->get_pixels();
+
+	//Image Data
+	for (int i = 0; i < image->size_y; i++) {
+		unsigned int row_ind = 0;
+		for (int z = 0; z < image->size_x; z++) {
+			//output << pixels->at(i * image->size_x + z)->get_r() << pixels->at(i * image->size_x + z)->get_g() << pixels->at(i * image->size_x + z)->get_b();
+			int t_r = pixels->at(i * image->size_x + z)->get_r();
+			output.write((char*)&(t_r), 1);
+			int t_g = pixels->at(i * image->size_x + z)->get_g();
+			output.write((char*)&(t_g), 1);
+			int t_b = pixels->at(i * image->size_x + z)->get_b();
+			output.write((char*)&(t_b), 1);
+			row_ind += 3;
+		}
+		for (int a = 0; a < (row_ind % 4); a++) {
+			uint8_t t_a = 0;
+			output.write((char*)&t_a, 1);
+		}
+	}
+
+	output.close();
+
+	return true;
 }
 
 Bitmap_Handler::~Bitmap_Handler()

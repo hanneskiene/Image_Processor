@@ -13,7 +13,7 @@ Image_Processor::Image_Processor()
 int Image_Processor::run()
 {
 
-	Bitmap_Handler my_bitmap_handler;
+	auto my_bitmap_handler = Bitmap_Handler{};
 
 	auto bmp_image_2 = my_bitmap_handler.get_Image("test3.bmp");
 
@@ -22,6 +22,8 @@ int Image_Processor::run()
 	Image_Modifier::invert(bmp_image_2.get());
 
 	bmp_image_2->console_print();
+
+	my_bitmap_handler.export_image(bmp_image_2.get(), "export1.bmp");
 
 	return true;
 }

@@ -65,10 +65,10 @@ public:
 	{
 
 	}
-private:
+
 	int size_x;
 	int size_y;
-
+private:
 	std::vector<std::unique_ptr<Pixel_t<T>>> pixels;
 };
 
