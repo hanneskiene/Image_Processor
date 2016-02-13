@@ -39,6 +39,15 @@ std::shared_ptr<Image> Bitmap_Handler::get_Image(const char * file_name)
 		size_y |= (unsigned char)buffer[24] << 16;
 		size_y |= (unsigned char)buffer[25] << 24;
 
+		uint16_t biBitCount = 0;
+		biBitCount |= (unsigned char)buffer[28];
+		biBitCount |= (unsigned char)buffer[29] << 8;
+
+		unsigned int bCompression = 0;
+		bCompression |= (unsigned char)buffer[30];
+		bCompression |= (unsigned char)buffer[31] << 8;
+		bCompression |= (unsigned char)buffer[32] << 16;
+		bCompression |= (unsigned char)buffer[33] << 24;
 
 		auto output = std::make_shared<Image>(size_x, size_y);
 
