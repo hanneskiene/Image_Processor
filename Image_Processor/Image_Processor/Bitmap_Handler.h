@@ -16,7 +16,7 @@ public:
 	~Bitmap_Handler();
 
 private:
-	unsigned int merge_bytes(char*, int, int);
+	unsigned int merge_bytes_unsigned(char*, int, int);
 
 };
 

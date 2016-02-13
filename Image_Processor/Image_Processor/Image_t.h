@@ -45,7 +45,7 @@ public:
 			if (i % compression == 0) {
 				for (int z = 0; z < size_x; z++) {
 					if (z % compression == 0) {
-						if (pixels.at(i*size_x + z)->r > 150)
+						if (pixels.at(i*size_x + z)->get_r() > 150)
 							std::cout << "0";
 						else
 							std::cout << " ";
@@ -54,6 +54,11 @@ public:
 				std::cout << std::endl;
 			}
 		}
+	}
+
+	std::vector<std::unique_ptr<Pixel_t<T>>>* get_pixels()
+	{
+		return &pixels;
 	}
 
 	~Image_t()

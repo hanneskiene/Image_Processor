@@ -27,7 +27,7 @@ public:
 
 	}
 
-//private:
+private:
 	T r, g, b;
 };
 

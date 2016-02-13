@@ -24,15 +24,15 @@ std::shared_ptr<Image_8> Bitmap_Handler::get_Image(const char * file_name)
 			char *buffer = new char[length];
 			input.read(buffer, length);
 
-			auto data_offset = merge_bytes(buffer, 10, 4);
+			auto data_offset = merge_bytes_unsigned(buffer, 10, 4);
 
-			auto size_x = merge_bytes(buffer, 18, 4);
+			auto size_x = merge_bytes_unsigned(buffer, 18, 4);
 
-			auto size_y = merge_bytes(buffer, 22, 4);
+			auto size_y = merge_bytes_unsigned(buffer, 22, 4);
 
-			uint16_t biBitCount = merge_bytes(buffer, 28, 2);
+			auto biBitCount = merge_bytes_unsigned(buffer, 28, 2);
 
-			auto bCompression = merge_bytes(buffer, 30, 24);
+			auto bCompression = merge_bytes_unsigned(buffer, 30, 24);
 
 			auto output = std::make_shared<Image_8>(size_x, size_y);
 
@@ -76,7 +76,7 @@ Bitmap_Handler::~Bitmap_Handler()
 {
 }
 
-unsigned int Bitmap_Handler::merge_bytes(char * data,int start, int byte_count)
+unsigned int Bitmap_Handler::merge_bytes_unsigned(char * data,int start, int byte_count)
 {
 	unsigned int out = 0;
 	for (int i = 0; i < byte_count; i++) {

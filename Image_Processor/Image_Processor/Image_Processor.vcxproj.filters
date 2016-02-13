@@ -24,6 +24,9 @@
     <ClInclude Include="Pixel_t.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="Image_Modifier.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Image_Processor.cpp">
@@ -37,6 +40,9 @@
     </ClCompile>
     <ClCompile Include="Image_t.h">
       <Filter>Headerdateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Image_Modifier.cpp">
+      <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

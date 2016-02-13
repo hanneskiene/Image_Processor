@@ -147,11 +147,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Bitmap_Handler.h" />
+    <ClInclude Include="Image_Modifier.h" />
     <ClInclude Include="Image_Processor.h" />
     <ClInclude Include="Pixel_t.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Bitmap_Handler.cpp" />
+    <ClCompile Include="Image_Modifier.cpp" />
     <ClCompile Include="Image_Processor.cpp" />
     <ClCompile Include="Image_t.h" />
     <ClCompile Include="Main.cpp" />
