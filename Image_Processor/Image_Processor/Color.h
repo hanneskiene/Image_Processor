@@ -2,27 +2,28 @@
 
 #include <iostream>
 
+template<class T>
 class Color
 {
 public:
 	//Default Color
 	Color();
-	//Grey COlor
-	Color(int);
+	//Grey Color
+	Color(T);
 	//RGB Color
-	Color(int, int, int);
+	Color(T, T, T);
 
-	void set_color(int);
+	void set_color(T);
 
-	void set_color(int, int, int);
+	void set_color(T, T, T);
 
-	unsigned char get_r();
-	unsigned char get_g();
-	unsigned char get_b();
+	T get_r();
+	T get_g();
+	T get_b();
 
 	~Color();
 
-	unsigned char r, g, b;
+	T r, g, b;
 
 };
 

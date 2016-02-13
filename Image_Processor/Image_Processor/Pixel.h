@@ -4,21 +4,23 @@
 
 #include "Color.h"
 
+template<class T>
 class Pixel
 {
 public:
 	//Create default Pixel
 	Pixel();
 	//Create RGB Pixel
-	Pixel(Color);
+	Pixel(Color<T>);
 
-	void set_color(Color);
+	void set_color(Color<T>);
 
-	Color get_color();
+	Color<T> get_color();
 
 	~Pixel();
 	
 private:
-	Color color;
+	Color<T> color;
 };
 
+#include "Pixel.cpp"

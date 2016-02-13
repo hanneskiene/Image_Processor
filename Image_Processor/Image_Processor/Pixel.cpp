@@ -1,28 +1,31 @@
 #include "Pixel.h"
 
 
-
+template<class T>
 Pixel::Pixel()
 {
 	color.set_color(0);
 }
 
-Pixel::Pixel(Color arg)
+template<class T>
+Pixel::Pixel(Color<T> arg)
 {
 
 }
 
+template<class T>
 void Pixel::set_color(Color a_c)
 {
 	color = a_c;
 }
 
-Color Pixel::get_color()
+template<class T>
+Color<T> Pixel::get_color()
 {
 	return color;
 }
 
-
+template<class T>
 Pixel::~Pixel()
 {
 	//std::cout << "Pixel destroyed" << std::endl;

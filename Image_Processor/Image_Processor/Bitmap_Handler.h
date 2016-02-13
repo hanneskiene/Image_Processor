@@ -9,9 +9,9 @@ public:
 	Bitmap_Handler();
 
 	//Is only able to import standard 8bit BMP without compression
-	std::shared_ptr<Image> get_Image(const char *file_name);
+	std::shared_ptr<Image<unsigned char>> get_Image(const char *file_name);
 
-	bool export_image(Image *, const char *);
+	bool export_image(Image<unsigned char> *, const char *);
 
 	~Bitmap_Handler();
 
