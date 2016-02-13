@@ -15,15 +15,13 @@ int Image_Processor::run()
 
 	auto my_bitmap_handler = Bitmap_Handler{};
 
-	auto bmp_image_2 = my_bitmap_handler.get_Image("test3.bmp");
-
-	bmp_image_2->console_print();
+	auto bmp_image_2 = my_bitmap_handler.get_Image("test4.bmp");
 
 	Image_Modifier::invert(bmp_image_2.get());
+	my_bitmap_handler.export_image(bmp_image_2.get(), "export_invert.bmp");
 
-	bmp_image_2->console_print();
-
-	my_bitmap_handler.export_image(bmp_image_2.get(), "export1.bmp");
+	Image_Modifier::greyValue(bmp_image_2.get());
+	my_bitmap_handler.export_image(bmp_image_2.get(), "export_grey.bmp");
 
 	return true;
 }
