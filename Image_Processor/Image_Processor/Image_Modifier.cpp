@@ -1,6 +1,8 @@
 #include "Image_Modifier.h"
 #include <memory>
 #include <vector>
+#include <iostream>
+#include "Region.h"
 
 Image_Modifier::Image_Modifier()
 {
@@ -35,6 +37,34 @@ void Image_Modifier::apply_matrix(Image_8 * image, Matrix matrix)
 		unsigned char resultR = (unsigned char)((pixels_B->at(i - 1).get_r())*matrix.get_value(i - 1) + (pixels_B->at(i).get_r())*matrix.get_value(i - 1) + (pixels_B->at(i + 1).get_r())*matrix.get_value(i - 1) + (pixels_B->at(i - 1).get_r())*matrix.get_value(i) + (pixels_B->at(i).get_r())*matrix.get_value(i) + (pixels_B->at(i).get_r())*matrix.get_value(i + 1) + (pixels_B->at(i - 1).get_r())*matrix.get_value(i + 1) + (pixels_B->at(i).get_r())*matrix.get_value(i + 1) + (pixels_B->at(i + 1).get_r())*matrix.get_value(i + 1));
 		unsigned char resultG = (unsigned char)((pixels_B->at(i - 1).get_g())*matrix.get_value(i - 1) + (pixels_B->at(i).get_g())*matrix.get_value(i - 1) + (pixels_B->at(i + 1).get_g())*matrix.get_value(i - 1) + (pixels_B->at(i - 1).get_g())*matrix.get_value(i) + (pixels_B->at(i).get_g())*matrix.get_value(i) + (pixels_B->at(i).get_g())*matrix.get_value(i + 1) + (pixels_B->at(i - 1).get_g())*matrix.get_value(i + 1) + (pixels_B->at(i).get_g())*matrix.get_value(i + 1) + (pixels_B->at(i + 1).get_g())*matrix.get_value(i + 1));
 		unsigned char resultB = (unsigned char)((pixels_B->at(i - 1).get_b())*matrix.get_value(i - 1) + (pixels_B->at(i).get_b())*matrix.get_value(i - 1) + (pixels_B->at(i + 1).get_b())*matrix.get_value(i - 1) + (pixels_B->at(i - 1).get_b())*matrix.get_value(i) + (pixels_B->at(i).get_b())*matrix.get_value(i) + (pixels_B->at(i).get_b())*matrix.get_value(i + 1) + (pixels_B->at(i - 1).get_b())*matrix.get_value(i + 1) + (pixels_B->at(i).get_b())*matrix.get_value(i + 1) + (pixels_B->at(i + 1).get_b())*matrix.get_value(i + 1));
+
+void Image_Modifier::edge_highlite(Image_8* image, int threshold)
+{
+	std::vector<Region> unsolved_regions;
+	std::vector<Region> solved_regions;
+
+	unsolved_regions.push_back(Region (image, threshold));
+
+	do {
+		for (int c = 0; c < unsolved_regions.size(); c++) {
+			auto res = unsolved_regions.at(c).solve();
+			if (res.size() > 0) {
+				unsolved_regions.erase(unsolved_regions.begin() + c);
+				for (int i = 0; i < res.size(); i++) {
+					unsolved_regions.push_back(res.at(i));
+				}
+			}
+			else {
+				solved_regions.push_back(unsolved_regions.at(c));
+				unsolved_regions.erase(unsolved_regions.begin() + c);
+				unsolved_regions.shrink_to_fit();
+			}
+		}
+	} while (unsolved_regions.size() > 0);
+	for (unsigned int i = 0; i < solved_regions.size(); i++) {
+		solved_regions.at(i).mark_edge();
+	}
+}
 
 		pixels->at(i).set_RGB(resultR, resultG, resultB);
 
