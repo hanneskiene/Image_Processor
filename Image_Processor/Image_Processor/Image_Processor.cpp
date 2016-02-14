@@ -32,12 +32,12 @@ int Image_Processor::run()
 	my_bitmap_handler.export_image(bmp_image_2.get(), "export_invert.bmp");
 	std::cout << "Image loaded" << std::endl;
 	STOP_TIMER("Image Import");
-
+	/*
 	START_TIMER;
 	Image_Modifier::grey_value(bmp_image_2.get());
 	std::cout << "Image greyed" << std::endl;
 	STOP_TIMER("Grey Algo");
-
+	*/
 	START_TIMER;
 	Image_Modifier::edge_highlite(bmp_image_2.get(), 150);
 	STOP_TIMER("Edge Highlite");
@@ -46,7 +46,7 @@ int Image_Processor::run()
 	my_bitmap_handler.export_image(bmp_image_2.get(), "export_edge.bmp");
 	std::cout << "Edge exported" << std::endl;
 	STOP_TIMER("Edge Export");
-	/*
+	
 	START_TIMER;
 	Image_Modifier::invert(bmp_image_2.get());
 	std::cout << "Image invertet" << std::endl;
@@ -56,7 +56,7 @@ int Image_Processor::run()
 	my_bitmap_handler.export_image(bmp_image_2.get(), "export_invert.bmp");
 	std::cout << "Image exportet" << std::endl;
 	STOP_TIMER("Invert Export");
-	
+	/*
 	START_TIMER;
 	Image_Modifier::grey_value(bmp_image_2.get());
 	std::cout << "Image greyed" << std::endl;

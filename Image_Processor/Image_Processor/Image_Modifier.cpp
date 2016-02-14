@@ -67,9 +67,12 @@ void Image_Modifier::edge_highlite(Image_8* image, int threshold)
 	} while (unsolved_regions.size() > 0);
 	for (unsigned int i = 0; i < solved_regions.size(); i++) {
 		solved_regions.at(i).mark_edge();
+		/*
 		if (solved_regions.at(i).size_x < 10 || solved_regions.at(i).size_y < 10) {
 			solved_regions.at(i).fill();
 		}
+		*/
+		solved_regions.at(i).fill_average();
 	}
 }
 
