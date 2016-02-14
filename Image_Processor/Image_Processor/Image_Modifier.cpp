@@ -6,6 +6,7 @@ Image_Modifier::Image_Modifier()
 {
 }
 
+
 void Image_Modifier::invert(Image_8 * image)
 {
 	auto pixels = image->get_pixels();
