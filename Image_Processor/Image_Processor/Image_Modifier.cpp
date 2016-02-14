@@ -21,10 +21,22 @@ void Image_Modifier::grey_value(Image_8 * image)
 {
 	auto pixels = image->get_pixels();
 	for (int i = 0; i < pixels->size(); i++) {
+
 		unsigned char grauwert = (unsigned char)((pixels->at(i).get_r() + pixels->at(i).get_g() + pixels->at(i).get_b()) / 3);
 		pixels->at(i).set_RGB(grauwert, grauwert, grauwert);
+
 	}
 }
+void Image_Modifier::apply_matrix(Image_8 * image, Matrix matrix)
+{
+	Image_8 *imgBuffer = image;
+	auto pixels_B = imgBuffer->get_pixels();
+	auto pixels = image->get_pixels();
+	for (int i = 0; i < pixels->size(); i++) {
+		
+		unsigned char resultR = (unsigned char)((pixels_B->at(i - 1).get_r())*matrix.get_value(i - 1) + (pixels_B->at(i).get_r())*matrix.get_value(i - 1) + (pixels_B->at(i + 1).get_r())*matrix.get_value(i - 1) + (pixels_B->at(i - 1).get_r())*matrix.get_value(i) + (pixels_B->at(i).get_r())*matrix.get_value(i) + (pixels_B->at(i).get_r())*matrix.get_value(i + 1) + (pixels_B->at(i - 1).get_r())*matrix.get_value(i + 1) + (pixels_B->at(i).get_r())*matrix.get_value(i + 1) + (pixels_B->at(i + 1).get_r())*matrix.get_value(i + 1));
+		unsigned char resultG = (unsigned char)((pixels_B->at(i - 1).get_g())*matrix.get_value(i - 1) + (pixels_B->at(i).get_g())*matrix.get_value(i - 1) + (pixels_B->at(i + 1).get_g())*matrix.get_value(i - 1) + (pixels_B->at(i - 1).get_g())*matrix.get_value(i) + (pixels_B->at(i).get_g())*matrix.get_value(i) + (pixels_B->at(i).get_g())*matrix.get_value(i + 1) + (pixels_B->at(i - 1).get_g())*matrix.get_value(i + 1) + (pixels_B->at(i).get_g())*matrix.get_value(i + 1) + (pixels_B->at(i + 1).get_g())*matrix.get_value(i + 1));
+		unsigned char resultB = (unsigned char)((pixels_B->at(i - 1).get_b())*matrix.get_value(i - 1) + (pixels_B->at(i).get_b())*matrix.get_value(i - 1) + (pixels_B->at(i + 1).get_b())*matrix.get_value(i - 1) + (pixels_B->at(i - 1).get_b())*matrix.get_value(i) + (pixels_B->at(i).get_b())*matrix.get_value(i) + (pixels_B->at(i).get_b())*matrix.get_value(i + 1) + (pixels_B->at(i - 1).get_b())*matrix.get_value(i + 1) + (pixels_B->at(i).get_b())*matrix.get_value(i + 1) + (pixels_B->at(i + 1).get_b())*matrix.get_value(i + 1));
 
 void Image_Modifier::edge_highlite(Image_8* image, int threshold)
 {
@@ -54,7 +66,10 @@ void Image_Modifier::edge_highlite(Image_8* image, int threshold)
 	}
 }
 
+		pixels->at(i).set_RGB(resultR, resultG, resultB);
 
+	}
+}
 Image_Modifier::~Image_Modifier()
 {
 }
