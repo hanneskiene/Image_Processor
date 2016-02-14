@@ -45,7 +45,7 @@ std::shared_ptr<Image_8> Bitmap_Handler::get_Image(const char * file_name)
 			unsigned int z = 0;
 
 			for (auto it = pixels->begin(); it != pixels->end(); it++) {
-				(*it).set_RGB((unsigned char)(buffer[index]), (unsigned char)(buffer[index + 1]), (unsigned char)(buffer[index + 2]));
+				(*it).set_RGB(255 - (unsigned char)(buffer[index]),255 - (unsigned char)(buffer[index + 1]),255 - (unsigned char)(buffer[index + 2]));
 				index += 3;
 				row_ind += 3;
 				z++;

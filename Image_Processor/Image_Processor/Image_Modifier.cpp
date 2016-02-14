@@ -50,7 +50,7 @@ void Image_Modifier::edge_highlite(Image_8* image, int threshold)
 	unsolved_regions.push_back(Region (image, threshold));
 
 	do {
-		for (int c = 0; c < unsolved_regions.size(); c++) {
+		for (unsigned int c = 0; c < unsolved_regions.size(); c++) {
 			auto res = unsolved_regions.at(c).solve();
 			if (res.size() > 0) {
 				unsolved_regions.erase(unsolved_regions.begin() + c);
@@ -67,6 +67,9 @@ void Image_Modifier::edge_highlite(Image_8* image, int threshold)
 	} while (unsolved_regions.size() > 0);
 	for (unsigned int i = 0; i < solved_regions.size(); i++) {
 		solved_regions.at(i).mark_edge();
+		if (solved_regions.at(i).size_x < 10 || solved_regions.at(i).size_y < 10) {
+			solved_regions.at(i).fill();
+		}
 	}
 }
 

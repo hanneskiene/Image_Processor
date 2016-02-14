@@ -84,9 +84,18 @@ std::vector<Region> Region::subdivide()
 void Region::mark_edge() 
 {
 	for (unsigned int i = 0; i < size_x; i++) {
-		image->get_pixel(i + start_x, start_y)->set_RGB(0, 0, 0);
+		image->get_pixel(i + start_x, start_y)->set_RGB(255, 0, 0);
 	}
 	for (unsigned int z = 0; z < size_y; z++) {
-		image->get_pixel(start_x, z + start_y)->set_RGB(0, 0, 0);
+		image->get_pixel(start_x, z + start_y)->set_RGB(255, 0, 0);
+	}
+}
+
+void Region::fill()
+{
+	for (unsigned int i = 1; i <= size_x; i++) {
+		for (unsigned int z = 1; z <= size_y; z++) {
+			image->get_pixel(start_x + i, z + start_y)->set_RGB(0, 0, 255);
+		}
 	}
 }

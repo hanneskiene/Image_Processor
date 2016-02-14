@@ -21,6 +21,8 @@ public:
 
 	void mark_edge();
 
+	void fill();
+
 	unsigned int start_x;
 	unsigned int start_y;
 	unsigned int size_x;
