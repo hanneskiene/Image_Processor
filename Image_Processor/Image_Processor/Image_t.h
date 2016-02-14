@@ -18,7 +18,7 @@ public:
 	{
 		size_x = a_x;
 		size_y = a_y;
-
+		//std::vector<Pixel_t<T>> pixels(size_x * size_x, Pixel_t<T>());
 		pixels.reserve(size_x * size_y);
 		//Add Pixels to Image
 		for (int i = 0; i < size_x; i++) {
