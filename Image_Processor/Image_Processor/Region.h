@@ -23,6 +23,8 @@ public:
 
 	void fill();
 
+	void fill_average();
+
 	unsigned int start_x;
 	unsigned int start_y;
 	unsigned int size_x;

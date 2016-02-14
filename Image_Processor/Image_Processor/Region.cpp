@@ -93,9 +93,34 @@ void Region::mark_edge()
 
 void Region::fill()
 {
-	for (unsigned int i = 1; i <= size_x; i++) {
-		for (unsigned int z = 1; z <= size_y; z++) {
+	for (unsigned int i = 1; i < size_x - 1; i++) {
+		for (unsigned int z = 1; z < size_y - 1; z++) {
 			image->get_pixel(start_x + i, z + start_y)->set_RGB(0, 0, 255);
+		}
+	}
+}
+
+void Region::fill_average()
+{
+	unsigned int r = 0;
+	unsigned int g = 0;
+	unsigned int b = 0;
+
+	for (unsigned int i = 0; i < size_x - 1; i++) {
+		for (unsigned int z = 0; z < size_y - 1; z++) {
+			r += (image->get_pixel(start_x + i, z + start_y)->get_r());
+			g += (image->get_pixel(start_x + i, z + start_y)->get_g());
+			b += (image->get_pixel(start_x + i, z + start_y)->get_b());
+		}
+	}
+
+	r /= size_x * size_y;
+	g /= size_x * size_y;
+	b /= size_x * size_y;
+
+	for (unsigned int i = 1; i <= size_x - 1; i++) {
+		for (unsigned int z = 1; z <= size_y - 1; z++) {
+			image->get_pixel(start_x + i, z + start_y)->set_RGB(r, g, b);
 		}
 	}
 }
