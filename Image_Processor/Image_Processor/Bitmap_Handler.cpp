@@ -38,18 +38,22 @@ std::shared_ptr<Image_8> Bitmap_Handler::get_Image(const char * file_name)
 
 			unsigned long index = data_offset;
 
-			for (unsigned int i = 0; i < size_y; i++) {
-				//Row index must be %4
-				unsigned int row_ind = 0;
-				for (unsigned int z = 0; z < size_x; z++) {
-					output->get_pixel(z, i)->set_RGB((unsigned char)(buffer[index]), (unsigned char)(buffer[index + 1]), (unsigned char)(buffer[index + 2]));
-					index += 3;
-					row_ind += 3;
-					//Catch last Bytes in Row
-					if (z == (size_x - 1)) {
-						while (row_ind % 4 != 0) { index++; row_ind++; }
-					}
+			unsigned int row_ind = 0;
 
+			auto pixels = output->get_pixels();
+
+			unsigned int z = 0;
+
+			for (auto it = pixels->begin(); it != pixels->end(); it++) {
+				(*it)->set_RGB((unsigned char)(buffer[index]), (unsigned char)(buffer[index + 1]), (unsigned char)(buffer[index + 2]));
+				index += 3;
+				row_ind += 3;
+				z++;
+				//Catch last Bytes in Row
+				if (z == (size_x)) {
+					while (row_ind % 4 != 0) { index++; row_ind++; }
+					row_ind = 0;
+					z = 0;
 				}
 			}
 
