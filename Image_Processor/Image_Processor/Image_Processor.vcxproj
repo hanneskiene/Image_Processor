@@ -149,6 +149,7 @@
     <ClInclude Include="Bitmap_Handler.h" />
     <ClInclude Include="Image_Modifier.h" />
     <ClInclude Include="Image_Processor.h" />
+    <ClInclude Include="Matrix.h" />
     <ClInclude Include="Pixel_t.h" />
     <ClInclude Include="Region.h" />
   </ItemGroup>

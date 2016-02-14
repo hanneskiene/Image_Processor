@@ -30,6 +30,9 @@
     <ClInclude Include="Region.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="Matrix.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Image_Processor.cpp">

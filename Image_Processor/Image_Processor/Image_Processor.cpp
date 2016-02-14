@@ -41,7 +41,7 @@ int Image_Processor::run()
 	my_bitmap_handler.export_image(bmp_image_2.get(), "export_edge.bmp");
 	std::cout << "Edge exportet" << std::endl;
 	STOP_TIMER("Edge Export");
-
+	/*
 	START_TIMER;
 	Image_Modifier::invert(bmp_image_2.get());
 	std::cout << "Image invertet" << std::endl;
@@ -61,7 +61,7 @@ int Image_Processor::run()
 	my_bitmap_handler.export_image(bmp_image_2.get(), "export_grey.bmp");
 	std::cout << "Image exportet" << std::endl;
 	STOP_TIMER("Grey Export");
-
+	*/
 	return true;
 }
 
