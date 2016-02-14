@@ -13,6 +13,7 @@ public:
 	static void edge_highlite(Image_8*, int);
 
 	static void apply_matrix(Image_8*, Matrix);
+	static void smooth();
 	~Image_Modifier();
 };
 

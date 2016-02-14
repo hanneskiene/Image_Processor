@@ -73,6 +73,11 @@ void Image_Modifier::edge_highlite(Image_8* image, int threshold)
 	}
 }
 
+void Image_Modifier::smooth()
+{
+
+}
+
 Image_Modifier::~Image_Modifier()
 {
 }
