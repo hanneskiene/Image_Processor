@@ -38,18 +38,22 @@ std::shared_ptr<Image_8> Bitmap_Handler::get_Image(const char * file_name)
 
 			unsigned long index = data_offset;
 
-			for (unsigned int i = 0; i < size_y; i++) {
-				//Row index must be %4
-				unsigned int row_ind = 0;
-				for (unsigned int z = 0; z < size_x; z++) {
-					output->get_pixel(z, i)->set_RGB((unsigned char)(buffer[index]), (unsigned char)(buffer[index + 1]), (unsigned char)(buffer[index + 2]));
-					index += 3;
-					row_ind += 3;
-					//Catch last Bytes in Row
-					if (z == (size_x - 1)) {
-						while (row_ind % 4 != 0) { index++; row_ind++; }
-					}
+			unsigned int row_ind = 0;
 
+			auto pixels = output->get_pixels();
+
+			unsigned int z = 0;
+
+			for (auto it = pixels->begin(); it != pixels->end(); it++) {
+				(*it).set_RGB((unsigned char)(buffer[index]), (unsigned char)(buffer[index + 1]), (unsigned char)(buffer[index + 2]));
+				index += 3;
+				row_ind += 3;
+				z++;
+				//Catch last Bytes in Row
+				if (z == (size_x)) {
+					while (row_ind % 4 != 0) { index++; row_ind++; }
+					row_ind = 0;
+					z = 0;
 				}
 			}
 
@@ -115,24 +119,30 @@ bool Bitmap_Handler::export_image(Image_8 * image, const char * file_name)
 	var_32_u = 0;
 	output.write((char*)&var_32_u, sizeof(var_32_u));
 
+	unsigned int row_ind = 0;
+
 	auto pixels = image->get_pixels();
 
-	//Image Data
-	for (int i = 0; i < image->size_y; i++) {
-		unsigned int row_ind = 0;
-		for (int z = 0; z < image->size_x; z++) {
-			//output << pixels->at(i * image->size_x + z)->get_r() << pixels->at(i * image->size_x + z)->get_g() << pixels->at(i * image->size_x + z)->get_b();
-			int t_r = pixels->at(i * image->size_x + z)->get_r();
-			output.write((char*)&(t_r), 1);
-			int t_g = pixels->at(i * image->size_x + z)->get_g();
-			output.write((char*)&(t_g), 1);
-			int t_b = pixels->at(i * image->size_x + z)->get_b();
-			output.write((char*)&(t_b), 1);
-			row_ind += 3;
-		}
-		for (int a = 0; a < (row_ind % 4); a++) {
-			uint8_t t_a = 0;
-			output.write((char*)&t_a, 1);
+	unsigned int z = 0;
+
+	for (auto it = pixels->begin(); it != pixels->end(); it++) {
+		int t_r = (*it).get_r();
+		output.write((char*)&(t_r), 1);
+		int t_g = (*it).get_g();
+		output.write((char*)&(t_g), 1);
+		int t_b = (*it).get_b();
+		output.write((char*)&(t_b), 1);
+		row_ind += 3;
+		z++;
+		//Catch last Bytes in Row
+		if (z == (image->size_x)) {
+			while (row_ind % 4 != 0) { 
+				row_ind++; 
+				uint8_t t_a = 0;
+				output.write((char*)&t_a, 1);
+			}
+			row_ind = 0;
+			z = 0;
 		}
 	}
 

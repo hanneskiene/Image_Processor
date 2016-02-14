@@ -8,7 +8,7 @@ public:
 	Image_Modifier();
 
 	static void invert(Image_8*);
-	static void greyValue(Image_8*);
+	static void grey_value(Image_8*);
 	~Image_Modifier();
 };
 
