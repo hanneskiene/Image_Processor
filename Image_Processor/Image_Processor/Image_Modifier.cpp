@@ -37,6 +37,10 @@ void Image_Modifier::apply_matrix(Image_8 * image, Matrix matrix)
 		unsigned char resultR = (unsigned char)((pixels_B->at(i - 1).get_r())*matrix.get_value(i - 1) + (pixels_B->at(i).get_r())*matrix.get_value(i - 1) + (pixels_B->at(i + 1).get_r())*matrix.get_value(i - 1) + (pixels_B->at(i - 1).get_r())*matrix.get_value(i) + (pixels_B->at(i).get_r())*matrix.get_value(i) + (pixels_B->at(i).get_r())*matrix.get_value(i + 1) + (pixels_B->at(i - 1).get_r())*matrix.get_value(i + 1) + (pixels_B->at(i).get_r())*matrix.get_value(i + 1) + (pixels_B->at(i + 1).get_r())*matrix.get_value(i + 1));
 		unsigned char resultG = (unsigned char)((pixels_B->at(i - 1).get_g())*matrix.get_value(i - 1) + (pixels_B->at(i).get_g())*matrix.get_value(i - 1) + (pixels_B->at(i + 1).get_g())*matrix.get_value(i - 1) + (pixels_B->at(i - 1).get_g())*matrix.get_value(i) + (pixels_B->at(i).get_g())*matrix.get_value(i) + (pixels_B->at(i).get_g())*matrix.get_value(i + 1) + (pixels_B->at(i - 1).get_g())*matrix.get_value(i + 1) + (pixels_B->at(i).get_g())*matrix.get_value(i + 1) + (pixels_B->at(i + 1).get_g())*matrix.get_value(i + 1));
 		unsigned char resultB = (unsigned char)((pixels_B->at(i - 1).get_b())*matrix.get_value(i - 1) + (pixels_B->at(i).get_b())*matrix.get_value(i - 1) + (pixels_B->at(i + 1).get_b())*matrix.get_value(i - 1) + (pixels_B->at(i - 1).get_b())*matrix.get_value(i) + (pixels_B->at(i).get_b())*matrix.get_value(i) + (pixels_B->at(i).get_b())*matrix.get_value(i + 1) + (pixels_B->at(i - 1).get_b())*matrix.get_value(i + 1) + (pixels_B->at(i).get_b())*matrix.get_value(i + 1) + (pixels_B->at(i + 1).get_b())*matrix.get_value(i + 1));
+		pixels->at(i).set_RGB(resultR, resultG, resultB);
+
+	}
+}
 
 void Image_Modifier::edge_highlite(Image_8* image, int threshold)
 {
@@ -66,10 +70,6 @@ void Image_Modifier::edge_highlite(Image_8* image, int threshold)
 	}
 }
 
-		pixels->at(i).set_RGB(resultR, resultG, resultB);
-
-	}
-}
 Image_Modifier::~Image_Modifier()
 {
 }
