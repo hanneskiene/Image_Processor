@@ -45,7 +45,7 @@ std::shared_ptr<Image_8> Bitmap_Handler::get_Image(const char * file_name)
 			unsigned int z = 0;
 
 			for (auto it = pixels->begin(); it != pixels->end(); it++) {
-				(*it)->set_RGB((unsigned char)(buffer[index]), (unsigned char)(buffer[index + 1]), (unsigned char)(buffer[index + 2]));
+				(*it).set_RGB((unsigned char)(buffer[index]), (unsigned char)(buffer[index + 1]), (unsigned char)(buffer[index + 2]));
 				index += 3;
 				row_ind += 3;
 				z++;
@@ -126,11 +126,11 @@ bool Bitmap_Handler::export_image(Image_8 * image, const char * file_name)
 	unsigned int z = 0;
 
 	for (auto it = pixels->begin(); it != pixels->end(); it++) {
-		int t_r = (*it)->get_r();
+		int t_r = (*it).get_r();
 		output.write((char*)&(t_r), 1);
-		int t_g = (*it)->get_g();
+		int t_g = (*it).get_g();
 		output.write((char*)&(t_g), 1);
-		int t_b = (*it)->get_b();
+		int t_b = (*it).get_b();
 		output.write((char*)&(t_b), 1);
 		row_ind += 3;
 		z++;
