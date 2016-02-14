@@ -5,13 +5,7 @@
 #include "Image_Modifier.h"
 #include <memory>
 #include <iostream>
-#include <chrono>
-#define INIT_TIMER auto start = std::chrono::high_resolution_clock::now()
-#define START_TIMER  start = std::chrono::high_resolution_clock::now()
-#define STOP_TIMER(name)  std::cout << "RUNTIME of " << name << ": " << \
-    std::chrono::duration_cast<std::chrono::milliseconds>( \
-            std::chrono::high_resolution_clock::now()-start \
-    ).count() << " ms " << std::endl
+#include <ctime>
 
 
 Image_Processor::Image_Processor()
@@ -20,44 +14,33 @@ Image_Processor::Image_Processor()
 
 int Image_Processor::run()
 {
-	INIT_TIMER;
-	START_TIMER;
+	clock_t begin = clock();
 
 	
 	auto my_bitmap_handler = Bitmap_Handler{};
 
-	auto bmp_image_2 = my_bitmap_handler.get_Image("test5.bmp");
+	auto bmp_image_2 = my_bitmap_handler.get_Image("test4.bmp");
+
+
+	Image_Modifier::invert(bmp_image_2.get());
+	my_bitmap_handler.export_image(bmp_image_2.get(), "export_invert.bmp");
 	std::cout << "Image loaded" << std::endl;
-	STOP_TIMER("Image Import");
 
-	START_TIMER;
-	Image_Modifier::edge_highlite(bmp_image_2.get(), 30);
-	STOP_TIMER("Edge Highlite");
-
-	START_TIMER;
-	my_bitmap_handler.export_image(bmp_image_2.get(), "export_edge.bmp");
-	std::cout << "Edge exportet" << std::endl;
-	STOP_TIMER("Edge Export");
-
-	START_TIMER;
 	Image_Modifier::invert(bmp_image_2.get());
 	std::cout << "Image invertet" << std::endl;
-	STOP_TIMER("Invert Algot");
 
-	START_TIMER;
 	my_bitmap_handler.export_image(bmp_image_2.get(), "export_invert.bmp");
 	std::cout << "Image exportet" << std::endl;
-	STOP_TIMER("Invert Export");
 
-	START_TIMER;
 	Image_Modifier::grey_value(bmp_image_2.get());
 	std::cout << "Image greyed" << std::endl;
-	STOP_TIMER("Grey Algo");
 
-	START_TIMER;
 	my_bitmap_handler.export_image(bmp_image_2.get(), "export_grey.bmp");
 	std::cout << "Image exportet" << std::endl;
-	STOP_TIMER("Grey Export");
+
+	clock_t end = clock();
+	double elapsed_secs = double(end - begin) / CLOCKS_PER_SEC;
+	std::cout << elapsed_secs << std::endl;
 
 	return true;
 }
