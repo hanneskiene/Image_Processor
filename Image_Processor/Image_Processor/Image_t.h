@@ -30,12 +30,12 @@ public:
 
 	Pixel_t<T> * get_pixel(int arg)
 	{
-		return pixels.at(arg).get();
+		return &pixels.at(arg);
 	}
 
 	Pixel_t<T> * get_pixel(int a_x, int a_y)
 	{
-		return pixels.at(a_y * size_x + a_x).get();
+		return &pixels.at(a_y * size_x + a_x);
 	}
 
 	std::vector<Pixel_t<T>>* get_pixels()
