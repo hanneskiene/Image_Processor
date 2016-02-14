@@ -1,4 +1,3 @@
-//Initializes First Object
 
 #include "Image_Processor.h"
 #include <iostream>
