@@ -26,9 +26,18 @@ int Image_Processor::run()
 	
 	auto my_bitmap_handler = Bitmap_Handler{};
 
-	auto bmp_image_2 = my_bitmap_handler.get_Image("test4.bmp");
+	auto bmp_image_2 = my_bitmap_handler.get_Image("test5.bmp");
 	std::cout << "Image loaded" << std::endl;
 	STOP_TIMER("Image Import");
+
+	START_TIMER;
+	Image_Modifier::edge_highlite(bmp_image_2.get(), 30);
+	STOP_TIMER("Edge Highlite");
+
+	START_TIMER;
+	my_bitmap_handler.export_image(bmp_image_2.get(), "export_edge.bmp");
+	std::cout << "Edge exportet" << std::endl;
+	STOP_TIMER("Edge Export");
 
 	START_TIMER;
 	Image_Modifier::invert(bmp_image_2.get());
@@ -49,15 +58,6 @@ int Image_Processor::run()
 	my_bitmap_handler.export_image(bmp_image_2.get(), "export_grey.bmp");
 	std::cout << "Image exportet" << std::endl;
 	STOP_TIMER("Grey Export");
-
-	START_TIMER;
-	Image_Modifier::edge_highlite(bmp_image_2.get(), 20);
-	STOP_TIMER("Edge Highlite");
-
-	START_TIMER;
-	my_bitmap_handler.export_image(bmp_image_2.get(), "export_edge.bmp");
-	std::cout << "Edge exportet" << std::endl;
-	STOP_TIMER("Edge Export");
 
 	return true;
 }
