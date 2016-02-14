@@ -51,11 +51,11 @@ int Image_Processor::run()
 	STOP_TIMER("Grey Export");
 
 	START_TIMER;
-	Image_Modifier::edge_highlite(bmp_image_2.get(), 10, 10, 30);
+	Image_Modifier::edge_highlite(bmp_image_2.get(), 20);
 	STOP_TIMER("Edge Highlite");
 
 	START_TIMER;
-	my_bitmap_handler.export_image(bmp_image_2.get(), "export_grey.bmp");
+	my_bitmap_handler.export_image(bmp_image_2.get(), "export_edge.bmp");
 	std::cout << "Edge exportet" << std::endl;
 	STOP_TIMER("Edge Export");
 

@@ -27,6 +27,9 @@
     <ClInclude Include="Image_Modifier.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="Region.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Image_Processor.cpp">
@@ -42,6 +45,9 @@
       <Filter>Headerdateien</Filter>
     </ClCompile>
     <ClCompile Include="Image_Modifier.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Region.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
