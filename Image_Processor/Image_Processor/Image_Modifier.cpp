@@ -9,16 +9,16 @@ Image_Modifier::Image_Modifier()
 void Image_Modifier::invert(Image_8 * image)
 {
 	auto pixels = image->get_pixels();
-	for (int i = 0; i < pixels->size(); i++) {
-		pixels->at(i)->set_RGB((255 - pixels->at(i)->get_r()), (255 - pixels->at(i)->get_g()), (255 - pixels->at(i)->get_b()));
+	for (auto it = pixels->begin(); it != pixels->end(); it++) {
+		(*it)->set_RGB((255 - (*it)->get_r()), (255 - (*it)->get_g()), (255 - (*it)->get_b()));
 	}
 }
-void Image_Modifier::greyValue(Image_8 * image)
+void Image_Modifier::grey_value(Image_8 * image)
 {
 	auto pixels = image->get_pixels();
-	for (int i = 0; i < pixels->size(); i++) {
-		unsigned char grauwert = (unsigned char)((pixels->at(i)->get_r()+ pixels->at(i)->get_g()+ pixels->at(i)->get_b())/3);
-		pixels->at(i)->set_RGB(grauwert, grauwert, grauwert);
+	for (auto it = pixels->begin(); it != pixels->end(); it++) {
+		unsigned char grauwert = (unsigned char)( ((*it)->get_r() + (*it)->get_g() + (*it)->get_b() ) / 3);
+		(*it)->set_RGB(grauwert, grauwert, grauwert);
 	}
 }
 
