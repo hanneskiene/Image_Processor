@@ -51,6 +51,16 @@ public:
 		return &pixels;
 	}
 
+	int  checkIndexBounds(int index) {
+		if (index < 0) {
+			index = 0;
+		}
+		else if (index >= size_x*size_y){
+			index = size_y*size_y;
+		}
+		return index;
+	}
+
 	~Image_t()
 	{
 
