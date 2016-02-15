@@ -3,6 +3,7 @@
 #include <vector>
 #include <iostream>
 #include "Region.h"
+#include "Matrix.h"
 
 Image_Modifier::Image_Modifier()
 {
@@ -29,14 +30,15 @@ void Image_Modifier::grey_value(Image_8 * image)
 }
 void Image_Modifier::apply_matrix(Image_8 * image, Matrix matrix)
 {
-	Image_8 *imgBuffer = image;
+	Image_8 *imgBuffer = image;//imgBuffer soll eine Kopie von img sein. check das mit den pointern nonet ganz deswegen weiss ich net wies geht... check das aus
 	auto pixels_B = imgBuffer->get_pixels();
 	auto pixels = image->get_pixels();
 	for (int i = 0; i < pixels->size(); i++) {
+
 		
-		unsigned char resultR = (unsigned char)((pixels_B->at(i - 1).get_r())*matrix.get_value(i - 1) + (pixels_B->at(i).get_r())*matrix.get_value(i - 1) + (pixels_B->at(i + 1).get_r())*matrix.get_value(i - 1) + (pixels_B->at(i - 1).get_r())*matrix.get_value(i) + (pixels_B->at(i).get_r())*matrix.get_value(i) + (pixels_B->at(i).get_r())*matrix.get_value(i + 1) + (pixels_B->at(i - 1).get_r())*matrix.get_value(i + 1) + (pixels_B->at(i).get_r())*matrix.get_value(i + 1) + (pixels_B->at(i + 1).get_r())*matrix.get_value(i + 1));
-		unsigned char resultG = (unsigned char)((pixels_B->at(i - 1).get_g())*matrix.get_value(i - 1) + (pixels_B->at(i).get_g())*matrix.get_value(i - 1) + (pixels_B->at(i + 1).get_g())*matrix.get_value(i - 1) + (pixels_B->at(i - 1).get_g())*matrix.get_value(i) + (pixels_B->at(i).get_g())*matrix.get_value(i) + (pixels_B->at(i).get_g())*matrix.get_value(i + 1) + (pixels_B->at(i - 1).get_g())*matrix.get_value(i + 1) + (pixels_B->at(i).get_g())*matrix.get_value(i + 1) + (pixels_B->at(i + 1).get_g())*matrix.get_value(i + 1));
-		unsigned char resultB = (unsigned char)((pixels_B->at(i - 1).get_b())*matrix.get_value(i - 1) + (pixels_B->at(i).get_b())*matrix.get_value(i - 1) + (pixels_B->at(i + 1).get_b())*matrix.get_value(i - 1) + (pixels_B->at(i - 1).get_b())*matrix.get_value(i) + (pixels_B->at(i).get_b())*matrix.get_value(i) + (pixels_B->at(i).get_b())*matrix.get_value(i + 1) + (pixels_B->at(i - 1).get_b())*matrix.get_value(i + 1) + (pixels_B->at(i).get_b())*matrix.get_value(i + 1) + (pixels_B->at(i + 1).get_b())*matrix.get_value(i + 1));
+		auto resultR = (unsigned char)((pixels_B->at(imgBuffer->checkIndexBounds(i - 1)).get_r())*matrix.get_value(0) + (pixels_B->at(i).get_r())*matrix.get_value(1) + (pixels_B->at(imgBuffer->checkIndexBounds(i + 1)).get_r())*matrix.get_value(2) + (pixels_B->at(imgBuffer->checkIndexBounds(i - 1)).get_r())*matrix.get_value(3) + (pixels_B->at(i).get_r())*matrix.get_value(4) + (pixels_B->at(imgBuffer->checkIndexBounds(i + 1)).get_r())*matrix.get_value(5) + (pixels_B->at(imgBuffer->checkIndexBounds(i - 1)).get_r())*matrix.get_value(6) + (pixels_B->at(i).get_r())*matrix.get_value(7) + (pixels_B->at(imgBuffer->checkIndexBounds(i + 1)).get_r())*matrix.get_value(8));
+		auto resultG = (unsigned char)((pixels_B->at(imgBuffer->checkIndexBounds(i - 1)).get_g())*matrix.get_value(0) + (pixels_B->at(i).get_g())*matrix.get_value(1) + (pixels_B->at(imgBuffer->checkIndexBounds(i + 1)).get_g())*matrix.get_value(2) + (pixels_B->at(imgBuffer->checkIndexBounds(i - 1)).get_g())*matrix.get_value(3) + (pixels_B->at(i).get_g())*matrix.get_value(4) + (pixels_B->at(imgBuffer->checkIndexBounds(i + 1)).get_g())*matrix.get_value(5) + (pixels_B->at(imgBuffer->checkIndexBounds(i - 1)).get_g())*matrix.get_value(6) + (pixels_B->at(i).get_g())*matrix.get_value(7) + (pixels_B->at(imgBuffer->checkIndexBounds(i + 1)).get_g())*matrix.get_value(8));
+		auto resultB = (unsigned char)((pixels_B->at(imgBuffer->checkIndexBounds(i - 1)).get_b())*matrix.get_value(0) + (pixels_B->at(i).get_b())*matrix.get_value(1) + (pixels_B->at(imgBuffer->checkIndexBounds(i + 1)).get_b())*matrix.get_value(2) + (pixels_B->at(imgBuffer->checkIndexBounds(i - 1)).get_b())*matrix.get_value(3) + (pixels_B->at(i).get_b())*matrix.get_value(4) + (pixels_B->at(imgBuffer->checkIndexBounds(i + 1)).get_b())*matrix.get_value(5) + (pixels_B->at(imgBuffer->checkIndexBounds(i - 1)).get_b())*matrix.get_value(6) + (pixels_B->at(i).get_b())*matrix.get_value(7) + (pixels_B->at(imgBuffer->checkIndexBounds(i + 1)).get_b())*matrix.get_value(8));
 		pixels->at(i).set_RGB(resultR, resultG, resultB);
 
 	}

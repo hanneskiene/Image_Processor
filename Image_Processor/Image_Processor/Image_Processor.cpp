@@ -1,6 +1,7 @@
 #include "Image_Processor.h"
 
 #include "Image_t.h"
+#include "Matrix.h"
 #include "Bitmap_Handler.h"
 #include "Image_Modifier.h"
 #include <memory>
@@ -26,9 +27,13 @@ int Image_Processor::run()
 	
 	auto my_bitmap_handler = Bitmap_Handler{};
 
-	auto bmp_image_2 = my_bitmap_handler.get_Image("test8.bmp");
-
-	//Image_Modifier::invert(bmp_image_2.get());
+	auto bmp_image_2 = my_bitmap_handler.get_Image("test6.bmp");
+	auto matrix = Matrix{};
+	matrix.set_value(0, 0, 0, 1, 0, 0, 0, 0, 0);
+	Image_Modifier::apply_matrix(bmp_image_2.get(),matrix);
+	my_bitmap_handler.export_image(bmp_image_2.get(), "export_matrix.bmp");
+	/*
+	Image_Modifier::invert(bmp_image_2.get());
 	my_bitmap_handler.export_image(bmp_image_2.get(), "export_invert.bmp");
 	std::cout << "Image loaded" << std::endl;
 	STOP_TIMER("Image Import");
@@ -46,7 +51,7 @@ int Image_Processor::run()
 	my_bitmap_handler.export_image(bmp_image_2.get(), "export_edge.bmp");
 	std::cout << "Edge exported" << std::endl;
 	STOP_TIMER("Edge Export");
-	/*
+	
 	START_TIMER;
 	Image_Modifier::invert(bmp_image_2.get());
 	std::cout << "Image invertet" << std::endl;
