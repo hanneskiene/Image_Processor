@@ -28,6 +28,14 @@ public:
 		}
 	}
 
+	Image_t(Image_t* old)
+	{
+		size_x = old->size_x;
+		size_y = old->size_y;
+
+		pixels = *(old->get_pixels());
+	}
+
 	Pixel_t<T> * get_pixel(int arg)
 	{
 		return &pixels.at(arg);
