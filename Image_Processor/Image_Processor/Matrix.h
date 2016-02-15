@@ -20,6 +20,8 @@ public:
 	int get_value(int arg);
 	
 	int get_value(int a_x, int a_y);
+
+	int checkIndexBounds(int index);
 	
 	
 	~Matrix();
