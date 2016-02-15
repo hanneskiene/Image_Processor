@@ -68,7 +68,9 @@ public:
 
 	int size_x;
 	int size_y;
+
 private:
+
 	std::vector<Pixel_t<T>> pixels;
 };
 

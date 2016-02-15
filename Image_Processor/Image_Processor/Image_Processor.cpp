@@ -7,6 +7,7 @@
 #include <memory>
 #include <iostream>
 #include <chrono>
+
 #define INIT_TIMER auto start = std::chrono::high_resolution_clock::now()
 #define START_TIMER  start = std::chrono::high_resolution_clock::now()
 #define STOP_TIMER(name)  std::cout << "RUNTIME of " << name << ": " << \
@@ -28,21 +29,23 @@ int Image_Processor::run()
 	auto my_bitmap_handler = Bitmap_Handler{};
 
 	auto bmp_image_2 = my_bitmap_handler.get_Image("test6.bmp");
+
+	auto image_copy = std::make_unique<Image_8>(bmp_image_2.get());
+
 	auto matrix = Matrix{};
+
 	matrix.set_value(0, 0, 0, 1, 0, 0, 0, 0, 0);
+
 	Image_Modifier::apply_matrix(bmp_image_2.get(),matrix);
+
 	my_bitmap_handler.export_image(bmp_image_2.get(), "export_matrix.bmp");
+
 	/*
 	Image_Modifier::invert(bmp_image_2.get());
 	my_bitmap_handler.export_image(bmp_image_2.get(), "export_invert.bmp");
 	std::cout << "Image loaded" << std::endl;
 	STOP_TIMER("Image Import");
-	/*
-	START_TIMER;
-	Image_Modifier::grey_value(bmp_image_2.get());
-	std::cout << "Image greyed" << std::endl;
-	STOP_TIMER("Grey Algo");
-	*/
+
 	START_TIMER;
 	Image_Modifier::edge_highlite(bmp_image_2.get(), 150);
 	STOP_TIMER("Edge Highlite");
@@ -61,7 +64,12 @@ int Image_Processor::run()
 	my_bitmap_handler.export_image(bmp_image_2.get(), "export_invert.bmp");
 	std::cout << "Image exportet" << std::endl;
 	STOP_TIMER("Invert Export");
-	/*
+
+	START_TIMER;
+	my_bitmap_handler.export_image(image_copy.get(), "copy_export.bmp");
+	std::cout << "Copy exportet" << std::endl;
+	STOP_TIMER("Copy Export");
+
 	START_TIMER;
 	Image_Modifier::grey_value(bmp_image_2.get());
 	std::cout << "Image greyed" << std::endl;
